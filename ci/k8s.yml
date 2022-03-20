@@ -1,0 +1,155 @@
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ${appName}-config
+  namespace: ${NAMESPACE}
+data:
+  nginx.conf: |
+    worker_processes  1;
+
+    error_log  /var/log/nginx/error.log warn;
+    pid        /var/run/nginx.pid;
+
+    events {
+      worker_connections  1024;
+    }
+
+    http {
+      include       /etc/nginx/mime.types;
+      default_type  application/octet-stream;
+
+      log_format    main  '$remote_addr - $remote_user [$time_local] "$request" '
+          '$status $body_bytes_sent "$http_referer" '
+          '"$http_user_agent" "$http_x_forwarded_for"';
+      access_log    /var/log/nginx/access.log main;
+      sendfile      on;
+      gzip on;
+      gzip_min_length 1k;
+      gzip_buffers 4 16k;
+      gzip_comp_level 9;
+      gzip_types text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;
+      gzip_vary on;
+      gzip_disable "MSIE [1-6]\.";
+
+      keepalive_timeout  65;
+      ignore_invalid_headers off;
+
+      add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload";
+      add_header X-Frame-Options DENY;
+      add_header X-Content-Type-Options nosniff;
+
+      proxy_connect_timeout 10s;
+      proxy_read_timeout 180s;
+
+      server {
+        listen 8080;
+
+        #location ^~ /api {
+        #    proxy_set_header        Host $host;
+        #    proxy_set_header        X-Real-IP $remote_addr;
+        #    proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+        #    proxy_set_header        X-Forwarded-Proto $scheme;
+        #    proxy_pass              ${API_URL};
+        #    proxy_redirect          default;
+        #    proxy_http_version 1.1;
+        #    proxy_request_buffering off;
+        #    proxy_buffering off;
+        #}
+
+        location / {
+            #sub_filter 为听云相关接入配置，每个应用或不同环境配置不同，请根据听云平台具体应用配置填写  
+            sub_filter  '<head>' '<head><script type="text/javascript">var TINGYUN_COOKIE_VALUE=document.cookie;document.cookie="TINGYUN_DATA=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";document.cookie="TINGYUN_DATA=; expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/";(function(d,s,id){if(/(MSIE [0-8].\d+)/.test(navigator.userAgent)){return;}"use strict";var __TINGYUN=function(t){function e(t){return function(e){return"Array"===t&&Array.isArray?Array.isArray(e):Object.prototype.toString.call(e)==="[object "+t+"]"}}function n(t,e,n){if(t&&n&&b(n)){var r=t[e];if(!r||!r._wrapped){var i=n(r,e);return i&&(i._wrapped=!0),t[e]=i,i}}}function r(e,n){return function(r){if(t[h].hook&&t[h].hook.eventCb&&f(r)){var i={originalCallback:e,eventHandlerType:n};return t[h].hook.eventCb.call(this,arguments,i)}return e.apply(this,arguments)}}function i(t,e,n){return n===k?r(t,e):(t.handleEvent=r(t.handleEvent,e),t)}function o(t){return b(t)}function a(t){return L(t)&&b(t.handleEvent)}function u(t){var e;return o(t)?e=k:a(t)&&(e=j),{isValid:t&&e,listenerType:e}}function s(t){return function(){var e=arguments[0],n=arguments[1],r=arguments[2],o=!0;r&&L(r)&&r[y]&&(o=!1);var a=u(n),s=a.isValid,l=a.listenerType;if(o&&O.indexOf(e)>-1&&s){var c;if(n[_]&&n[_][this])c=n[_][this];else{var p=i(n,E,l);l===k&&(n[_]||(n[_]={},n[_][T]=0),n[_][this]={listener:p,options:arguments[2]},n[_][T]++,c=n[_][this])}c&&(c.listener&&(arguments[1]=c.listener),c.options&&(arguments[2]=c.options))}return t&&t.apply(this,arguments)}}function l(t){return function(e,n){var r;try{r=t&&t.apply(this,arguments)}finally{try{if(n&&O.indexOf(e)>-1){var i=n[_];i&&i[this]&&i[this].listener&&(null!=i[this].options?this.removeEventListener(e,i[this].listener,i[this].options):this.removeEventListener(e,i[this].listener),i[this]=null,i[T]--,i[T]<=0&&(n[_]=null,delete n[_]))}}catch(o){}}return r}}function c(){t.EventTarget&&(n(t.EventTarget.prototype,"addEventListener",function(t){return s(t)}),n(t.EventTarget.prototype,"removeEventListener",function(t){return l(t)}))}function p(){Object.getOwnPropertyDescriptor&&Object.defineProperty&&O.forEach(function(e){var n="on"+e,r=Object.getOwnPropertyDescriptor(t.HTMLElement.prototype,n),o=r.get,a=r.set;Object.defineProperty(t.HTMLElement.prototype,n,{get:function(){return o.apply(this,arguments)},set:function(){var t=arguments[0];return t&&(arguments[0]=i(t,d,k)),a&&a.apply(this,arguments)},configurable:!0,enumerable:!0})})}function f(e){return e&&e.target instanceof t.HTMLElement&&e.currentTarget instanceof t.HTMLElement}function v(){return t.HTMLElement&&(c(),p()),t[h].listenerHooked=!0,t[h]}var h="__TINGYUN",y="__ty_event_patch_disable",g="click",m="submit",E="addEventListener",d="onProperty",_="__TY_ELEMENT_CB",T="__TY_CB_COUNTER",b=e("Function"),L=e("Object"),O=[g,m],k=1,j=2;t[h]||(t[h]={}),t[h].hook||(t[h].hook={}),t[h].hook.eventCb=null;var C=v();return C}(window);var js,tjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return;}js=d.createElement(s);js.id=id;js.async=true;js.src="//10.50.101.42:8588/js/lNXvexXCq6I.js";tjs.parentNode.insertBefore(js,tjs);})(document,"script","tingyun_agent");</script>';
+            sub_filter_once on;
+            root   /usr/share/nginx/html;
+            index  index.html index.htm;
+            try_files $uri $uri/ @rewrites;
+        }
+        #对于带有前缀的应用对应如下配置，以/app为例
+        #location ^~ /app/ {
+        #    root   /usr/share/nginx/html;
+        #    index  index.html index.htm;
+        #    try_files $uri $uri/ @rewrites;
+        #}
+        #location / {
+        #    rewrite / /app/;
+        #}
+
+        location @rewrites {
+            rewrite ^(.+)$ /index.html last;
+        }
+      }
+    }
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${appName}
+  namespace: ${NAMESPACE}
+  labels:
+    k8s-app: ${appName}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: ${appName}
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        k8s-app: ${appName}
+    spec:
+      containers:
+        - name: ${appName}
+          image: ${IMAGE_FULL_NAME}
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+      imagePullSecrets:
+        - name: ${appName}
+      volumes:
+        - name: config-volume
+          configMap:
+            name: ${appName}-config
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${appName}
+  namespace: ${NAMESPACE}
+  labels:
+    k8s-app: ${appName}
+spec:
+  selector:
+    k8s-app: ${appName}
+  ports:
+    - port: 8080
+      targetPort: 8080
+
+---
+
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: ${appName}-ingress
+  namespace: ${NAMESPACE}
+spec:
+  rules:
+    - host: uc.${NAMESPACE}.cicc.io
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              serviceName: ${appName}
+              servicePort: 8080
