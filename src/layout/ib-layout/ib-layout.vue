@@ -1,10 +1,12 @@
 <template>
-	<ib-header class="header"></ib-header>
 	<div class="container">
-		<ib-aside class="aside"></ib-aside>
-		<ib-main class="main">
-			<router-view></router-view>
-		</ib-main>
+		<ib-header class="header"></ib-header>
+		<div class="main-container">
+			<ib-aside class="aside"></ib-aside>
+			<ib-main class="main">
+				<router-view></router-view>
+			</ib-main>
+		</div>
 	</div>
 </template>
 
@@ -15,6 +17,10 @@ import IbMain from './components/ib-main';
 </script>
 
 <style scoped>
+.container {
+	width: 100%;
+	height: 100%;
+}
 .header {
 	position: fixed;
 	width: 100%;
@@ -23,7 +29,7 @@ import IbMain from './components/ib-main';
 	background-color: rgba(255, 255, 255, 1);
 	box-shadow: 0px 4px 30px 0px rgb(217 225 232 / 59%);
 }
-.container {
+.main-container {
 	display: flex;
 	box-sizing: border-box;
 	height: 100%;

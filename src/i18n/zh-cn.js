@@ -1,3 +1,5 @@
 export default {
-	name: '姓名',
+	message: {
+		name: '姓名',
+	},
 };
