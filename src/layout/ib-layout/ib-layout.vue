@@ -38,9 +38,11 @@ import IbMain from './components/ib-main';
 }
 .aside {
 	width: 240px;
+	box-sizing: border-box;
 	background-color: rgba(255, 255, 255, 1);
 	box-shadow: 0px 4px 30px 0px rgb(217 225 232 / 59%);
-	overflow: auto;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 .main {
 	flex: 1;

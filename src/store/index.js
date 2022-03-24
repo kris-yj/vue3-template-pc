@@ -5,7 +5,9 @@ import getters from './getters';
 
 const store = createStore({
 	state() {
-		return {};
+		return {
+			locale: window.navigator.language.toLowerCase() || 'zh-cn',
+		};
 	},
 	actions,
 	mutations,

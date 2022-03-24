@@ -1,5 +1,9 @@
+import ElementPlusZhCn from 'element-plus/lib/locale/lang/zh-cn';
+
 export default {
 	message: {
-		name: '姓名',
+		testName: '姓名',
+		hello: '你好',
+		...ElementPlusZhCn,
 	},
 };

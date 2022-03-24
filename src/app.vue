@@ -1,10 +1,8 @@
 <template>
-	<!-- <basic-layout></basic-layout> -->
 	<ib-layout></ib-layout>
 </template>
 
 <script setup>
-// import BasicLayout from '@/layout/basic-layout';
 import IbLayout from '@/layout/ib-layout/ib-layout';
 </script>
 

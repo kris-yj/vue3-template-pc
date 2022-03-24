@@ -29,6 +29,7 @@ module.exports = {
 			// 	},
 			// },
 		},
+		// runtimeCompiler: true
 		// disableHostCheck: true, // 是否开启host校验，默认false
 	},
 };
