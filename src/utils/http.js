@@ -2,17 +2,13 @@ import axios from 'axios';
 import store from '@/store';
 import { ElNotification } from 'element-plus';
 
-// create an axios instance
-const service = axios.create({
-	baseURL: process.env.VUE_APP_API_BASE_URL, // url = base url + request url
-	// withCredentials: true, // send cookies when cross-domain requests
-	timeout: 5000, // request timeout
-});
+// 设置默认baseURL
+axios.defaults.baseURL = process.env.VUE_APP_API_BASE_URL;
 
 /**
  * 请求拦截器，模拟给每个请求添加header数据
  */
-service.interceptors.request.use(
+axios.interceptors.request.use(
 	(config) => {
 		const token = store.getters.token;
 		if (token) {
@@ -28,7 +24,7 @@ service.interceptors.request.use(
 /**
  * 响应拦截器，统一处理返回数据
  */
-service.interceptors.response.use(
+axios.interceptors.response.use(
 	(response) => response.data,
 	(error) => {
 		let headers = {};
@@ -79,5 +75,3 @@ service.interceptors.response.use(
 		return Promise.reject(error);
 	}
 );
-
-export default service;
