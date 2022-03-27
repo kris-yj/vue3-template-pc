@@ -1,10 +1,15 @@
-const apiFilesMap = require.context('.', false, /\.js$/);
+const conmmonApiFilesMap = require.context('.', false, /\.js$/);
 
 const commonApi = {};
 
-apiFilesMap.keys().forEach((key) => {
+conmmonApiFilesMap.keys().forEach((key) => {
 	if (key === './index.js') return;
-	Object.assign(commonApi, apiFilesMap(key).default);
+	Object.assign(commonApi, conmmonApiFilesMap(key).default);
 });
 
-export default commonApi;
+const api = {};
+
+export default {
+	...api,
+	...commonApi,
+};

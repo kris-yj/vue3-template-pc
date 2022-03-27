@@ -4,10 +4,8 @@ const resolve = function (dir) {
 };
 
 module.exports = {
-	publicPath:
-		process.env.NODE_ENV === 'production'
-			? process.env.VUE_APP_BASE_URL
-			: '/',
+	publicPath: process.env.VUE_APP_BASE_URL,
+	outputDir: 'dist/pitchbook',
 	assetsDir: 'static',
 	// lintOnSave: true, // 是否开启eslint保存检测
 	productionSourceMap: false, // 是否在构建生产包时生成SourceMap
@@ -20,14 +18,14 @@ module.exports = {
 		port: '6001',
 		hot: true,
 		proxy: {
-			// '/api': {
-			// 	target: process.env.VUE_APP_SERVER_URL,
-			// 	changeOrigin: true,
-			// 	secure: false,
-			// 	pathRewrite: {
-			// 		'^/api': '/api',
-			// 	},
-			// },
+			'/api': {
+				target: process.env.VUE_APP_SERVER_URL,
+				changeOrigin: true,
+				secure: false,
+				pathRewrite: {
+					'^/api': '/',
+				},
+			},
 		},
 		// runtimeCompiler: true
 		// disableHostCheck: true, // 是否开启host校验，默认false

@@ -1,8 +1,15 @@
-import http from '@/utils/http';
+import axios from 'axios';
 
 const userApi = {
 	fetchUserInfo: () => {
-		return http.get('/user');
+		return axios.get('/user');
+	},
+	fileSearch: () => {
+		return axios.post('files/search', {
+			params: {
+				keywords: 'search',
+			},
+		});
 	},
 };
 

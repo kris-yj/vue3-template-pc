@@ -10,7 +10,7 @@ const requireModules = require.context(
 	'@/modules/',
 	// 是否查询其子目录
 	true,
-	/routes.js$/
+	/route.js$/
 );
 const modulesKeys = requireModules.keys();
 
