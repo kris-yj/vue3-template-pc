@@ -18,6 +18,7 @@ module.exports = {
     es2021: true,
   },
   parser: "vue-eslint-parser",
+  ignorePatterns: ["/*.*", "build/*", "ci/*", "node_modules/**"],
   extends: [
     "eslint:recommended",
     "plugin:vue/vue3-essential",

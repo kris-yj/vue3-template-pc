@@ -3,7 +3,17 @@
 		<div>module-test</div>
 		<div>
 			<el-button @click="openMessage">element-plus按钮</el-button>
-			<el-button type="primary" @click="apiTest">axios测试</el-button>
+			<el-button type="primary" @click="apiTest" name="sadsd" hhh="sdsd">
+				axios测试
+			</el-button>
+			<div
+				type="primary"
+				@click="apiTest"
+				name="sadsd"
+				hhh="sdsd"
+				hsad="sadasd">
+				sdasdad
+			</div>
 			<el-button type="danger" @click="apiTest2">axios测试2</el-button>
 			<el-button type="success" @click="apiTest3">axios测试3</el-button>
 			<!-- <div>{{ $t('hello') }}</div> -->

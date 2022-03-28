@@ -6,7 +6,6 @@ import store from '@/store';
 import i18n from '@/i18n';
 import '@/utils/http';
 import App from '@/app.vue';
-// import ElementPlusZhCn from 'element-plus/lib/locale/lang/zh-cn';
 
 const app = createApp(App);
 
