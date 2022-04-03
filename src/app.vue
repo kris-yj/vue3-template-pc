@@ -1,9 +1,10 @@
 <template>
-	<ib-layout></ib-layout>
+	<!-- <ib-layout></ib-layout> -->
+	<router-view></router-view>
 </template>
 
 <script setup>
-import IbLayout from '@/layout/ib-layout/ib-layout';
+// import IbLayout from '@/layout/ib-layout';
 </script>
 
 <style>

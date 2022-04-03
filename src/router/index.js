@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import camelcase from 'camelcase';
+import IBLayout from '@/layout/ib-layout';
 
 const routes = [];
 
@@ -27,21 +28,27 @@ routes.push({
 requireModules.keys().forEach((matchPath) => {
 	const moduleName = matchPath.split('/')[1];
 	const routeConfig = requireModules(matchPath).default[0];
-	routes.push({
+	const moduleRoute = {
 		path: `/${moduleName}`,
-		name: `${camelcase(moduleName)}`,
-		component: () => import(`@/modules/${moduleName}/pages/index`),
-	});
-	// 如果module里存在子路由，提取出来 push 到 routes 配置中
+		component: IBLayout,
+		meta: {
+			title: moduleName,
+		},
+		children: [
+			{
+				path: '',
+				name: `${camelcase(moduleName)}`,
+				component: () => import(`@/modules/${moduleName}/pages/index`),
+			},
+		],
+	};
+
+	// 如果module里存在子路由，提取出来
 	if (routeConfig && routeConfig.children) {
-		for (const childRoute of routeConfig.children) {
-			routes.push({
-				path: `/${moduleName}/${childRoute.path}`,
-				name: `${childRoute.name}`,
-				component: childRoute.component,
-			});
-		}
+		moduleRoute.children.push(...routeConfig.children);
 	}
+
+	routes.push(moduleRoute);
 });
 
 const router = createRouter({

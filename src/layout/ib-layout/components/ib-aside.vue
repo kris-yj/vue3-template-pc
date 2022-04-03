@@ -12,22 +12,22 @@
 				class="menu"
 				:collapse="isCollapse"
 				:router="true"
-				default-active="module-test">
-				<el-menu-item index="sdsd">
+				default-active="/module-test">
+				<el-menu-item index="/sdsd">
 					<el-icon><icon-menu /></el-icon>
 					<template #title>工时填报</template>
 				</el-menu-item>
-				<el-menu-item index="module-test">
+				<el-menu-item index="/module-test">
 					<el-icon><setting /></el-icon>
 					<template #title>工时审核</template>
 				</el-menu-item>
-				<el-menu-item index="3">
+				<el-menu-item index="/sdsdaa">
 					<el-icon><Document /></el-icon>
 					<template #title>历史审核</template>
 				</el-menu-item>
 			</el-menu>
 		</div>
-		<div v-show="!isCollapse" class="menu-pic">
+		<div class="menu-pic">
 			<img src="@/assets/images/p.png" />
 		</div>
 	</div>
@@ -56,14 +56,6 @@ const collapseClick = () => {
 	padding-right: 10px;
 	padding-bottom: 30px;
 	transition: width 0.28s;
-
-	&.menu-collapse {
-		padding-right: 0px;
-
-		.collapse-btn {
-			margin-right: 10px;
-		}
-	}
 }
 .menu-content {
 	flex: 1;
@@ -79,6 +71,16 @@ const collapseClick = () => {
 
 	&.el-menu--collapse {
 		width: 64px;
+	}
+}
+.menu-collapse {
+	padding-right: 0px;
+
+	& .collapse-btn {
+		margin-right: 10px;
+	}
+	& .menu-pic {
+		width: 0px;
 	}
 }
 .collapse-area {
@@ -113,7 +115,9 @@ const collapseClick = () => {
 	width: 220px;
 	height: 230px;
 	padding-left: 10px;
-	img {
+	overflow: hidden;
+	transition: width 0.28s;
+	& img {
 		width: 220px;
 		height: 230px;
 	}
