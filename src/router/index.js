@@ -30,7 +30,7 @@ requireModules.keys().forEach((matchPath) => {
 	routes.push({
 		path: `/${moduleName}`,
 		name: `${camelcase(moduleName)}`,
-		component: () => import(`@/modules/${moduleName}/pages/${moduleName}`),
+		component: () => import(`@/modules/${moduleName}/pages/index`),
 	});
 	// 如果module里存在子路由，提取出来 push 到 routes 配置中
 	if (routeConfig && routeConfig.children) {

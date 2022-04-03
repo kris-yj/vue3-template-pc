@@ -37,7 +37,7 @@ import IbMain from './components/ib-main';
 	overflow: hidden;
 }
 .aside {
-	width: 240px;
+	/* width: 240px; */
 	box-sizing: border-box;
 	background-color: rgba(255, 255, 255, 1);
 	box-shadow: 0px 4px 30px 0px rgb(217 225 232 / 59%);

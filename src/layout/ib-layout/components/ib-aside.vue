@@ -1,47 +1,73 @@
 <template>
-	<div class="menu-wrap">
+	<div class="menu-wrap" :class="{ 'menu-collapse': isCollapse }">
 		<div class="collapse-area">
-			<!-- <div class="collapse"></div> -->
+			<div class="collapse-btn" @click="collapseClick">
+				<el-icon color="#0d4ded">
+					<fold />
+				</el-icon>
+			</div>
 		</div>
 		<div class="menu-content">
-			<el-menu default-active="1" class="menu" :collapse="false">
-				<el-menu-item index="1">
+			<el-menu
+				class="menu"
+				:collapse="isCollapse"
+				:router="true"
+				default-active="module-test">
+				<el-menu-item index="sdsd">
 					<el-icon><icon-menu /></el-icon>
-					<span>工时填报</span>
+					<template #title>工时填报</template>
 				</el-menu-item>
-				<el-menu-item index="2">
+				<el-menu-item index="module-test">
 					<el-icon><setting /></el-icon>
-					<span>工时审核</span>
+					<template #title>工时审核</template>
 				</el-menu-item>
 				<el-menu-item index="3">
 					<el-icon><Document /></el-icon>
-					<span>历史审核</span>
+					<template #title>历史审核</template>
 				</el-menu-item>
 			</el-menu>
 		</div>
-		<div class="menu-pic">
+		<div v-show="!isCollapse" class="menu-pic">
 			<img src="@/assets/images/p.png" />
 		</div>
 	</div>
 </template>
 
 <script setup>
-// import { ref } from 'vue';
-import { Setting, Document, Menu as IconMenu } from '@element-plus/icons-vue';
+import { ref } from 'vue';
+import {
+	Setting,
+	Document,
+	Fold,
+	Menu as IconMenu,
+} from '@element-plus/icons-vue';
 
-// const isCollapse = ref(false);
+const isCollapse = ref(false);
 
-// const collapse = () => {
-// 	isCollapse.value = !isCollapse.value;
-// };
+const collapseClick = () => {
+	isCollapse.value = !isCollapse.value;
+};
 </script>
 
 <style scoped>
 .menu-wrap {
+	display: flex;
+	flex-direction: column;
 	padding-right: 10px;
+	padding-bottom: 30px;
+	transition: width 0.28s;
+
+	&.menu-collapse {
+		padding-right: 0px;
+
+		.collapse-btn {
+			margin-right: 10px;
+		}
+	}
 }
 .menu-content {
-	height: calc(100% - 328px);
+	flex: 1;
+	flex-shrink: 0;
 }
 .menu {
 	--el-menu-active-color: #0d4ded;
@@ -49,18 +75,29 @@ import { Setting, Document, Menu as IconMenu } from '@element-plus/icons-vue';
 	--el-menu-item-font-size: 16px;
 	--el-menu-border-color: transparent;
 	--el-menu-item-height: 48px;
-	/* font-weight: 500; */
+	width: 230px;
+
+	&.el-menu--collapse {
+		width: 64px;
+	}
 }
 .collapse-area {
 	height: 68px;
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
+	flex-shrink: 0;
 }
-.collapse {
+.collapse-btn {
 	height: 36px;
 	width: 36px;
-	border: 1px solid #333333;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #e7eefe;
+	border-radius: 25px;
+	font-size: 20px;
+	cursor: pointer;
 }
 .el-menu-item {
 	color: #0d4ded;

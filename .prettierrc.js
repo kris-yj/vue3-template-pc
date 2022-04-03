@@ -5,7 +5,7 @@
 
 module.exports = {
   singleQuote: true,
-  tabWidth: 2,
+  tabWidth: 4,
   useTabs: true,
   bracketSameLine: true,
   htmlWhitespaceSensitivity: 'ignore'
