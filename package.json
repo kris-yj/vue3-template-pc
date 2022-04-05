@@ -9,7 +9,8 @@
     "lint": "npm run lint:js  && npm run lint:format",
     "lint:js": "eslint src --fix --ext .js,.jsx,.ts,.tsx,.vue --cache --cache-location node_modules/.cache/eslint/",
     "lint:css": "stylelint --fix \"src/**/*.{less,postcss,css,scss,vue}\" --cache --cache-location node_modules/.cache/stylelint/",
-    "lint:format": "prettier --write  \"src/**/*.{js,json,ts,tsx,vue,css,less,scss,html,md}\""
+    "lint:format": "prettier --write  \"src/**/*.{js,json,ts,tsx,vue,css,less,scss,html,md}\"",
+    "inspect": "vue-cli-service inspect > output.js"
   },
   "repository": {
     "type": "git",

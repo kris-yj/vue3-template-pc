@@ -4,7 +4,8 @@ export default [
 			{
 				path: 'child',
 				name: 'child',
-				component: () => import('./pages/child'),
+				component: () =>
+					import(/* webpackChunkName: "child" */ './pages/child'),
 				meta: {
 					title: '子路由1',
 				},
@@ -12,7 +13,10 @@ export default [
 			{
 				path: 'child-other',
 				name: 'childOther',
-				component: () => import('./pages/child-other'),
+				component: () =>
+					import(
+						/* webpackChunkName: "child-other" */ './pages/child-other'
+					),
 				meta: {
 					title: '子路由2',
 				},
