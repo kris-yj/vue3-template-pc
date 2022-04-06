@@ -1,13 +1,10 @@
 <template>
-	<div></div>
+	<div>
+		<breadcrumb></breadcrumb>
+		<div>Child</div>
+	</div>
 </template>
 
-<script>
-export default {
-	data: function () {
-		return {
-			foo: null,
-		};
-	},
-};
+<script setup>
+import Breadcrumb from '@/components/breadcrumb';
 </script>
